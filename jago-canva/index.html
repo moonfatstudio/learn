@@ -37,9 +37,17 @@
   #gate h1{font-family:var(--display);font-weight:700;font-size:clamp(1.8rem,5vw,2.4rem);text-transform:uppercase;letter-spacing:.02em;margin:8px 0 6px}
   #gate .sub{font-family:var(--serif);color:var(--gold);font-size:1.15rem;margin-bottom:28px}
   .field{display:flex;flex-direction:column;gap:12px}
-  #code{width:100%;padding:16px 18px;text-align:center;font-family:var(--display);font-weight:600;font-size:1.1rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:12px;outline:none}
+  #code{width:100%;padding:16px 52px;text-align:center;font-family:var(--display);font-weight:600;font-size:1.1rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:12px;outline:none}
   #code::placeholder{color:var(--muted);letter-spacing:.1em;font-weight:400}
   #code:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(242,204,143,.12)}
+  .input-wrap{position:relative}
+  .peek{position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:0;cursor:pointer;color:var(--muted);padding:8px;border-radius:8px;display:grid;place-items:center;transition:color .15s ease}
+  .peek svg{width:21px;height:21px;display:block}
+  .peek .eye-off{display:none}
+  .peek.revealed .eye{display:none}
+  .peek.revealed .eye-off{display:block}
+  .peek:hover{color:var(--gold)}
+  .peek:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
   .btn{padding:16px;border:0;cursor:pointer;font-family:var(--display);font-weight:600;font-size:1rem;letter-spacing:.08em;text-transform:uppercase;color:#241a06;background:linear-gradient(180deg,var(--gold),var(--gold-deep));border-radius:12px;transition:transform .15s ease,filter .15s ease}
   .btn:hover{transform:translateY(-2px);filter:brightness(1.03)}
   .btn:active{transform:translateY(0)}
@@ -79,7 +87,13 @@
       <h1>Member Area</h1>
       <p class="sub">Masukkan kode aksesmu</p>
       <div class="field">
-        <input id="code" type="text" inputmode="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="Kode akses" aria-label="Kode akses">
+        <div class="input-wrap">
+          <input id="code" type="password" inputmode="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="Kode akses" aria-label="Kode akses">
+          <button type="button" id="peek" class="peek" aria-label="Tampilkan atau sembunyikan kode">
+            <svg class="eye" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.7"/></svg>
+            <svg class="eye-off" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 3l18 18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M10.6 6.1C11.06 6.03 11.53 6 12 6c6 0 9.5 6 9.5 6a17.9 17.9 0 0 1-3.2 3.8M6.4 6.7A17.7 17.7 0 0 0 2.5 12S6 18 12 18c1.4 0 2.7-.3 3.9-.8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+          </button>
+        </div>
         <button class="btn" id="submit" type="button">Masuk</button>
       </div>
       <p id="err" role="alert"></p>
@@ -115,10 +129,10 @@
         </div>
       </section>
       <div class="cta-wrap">
-        <a class="cta" id="enter" href="#" target="_blank" rel="noopener noreferrer">
+        <a class="cta" id="enter" href="#">
           Masuk ke Member Area
         </a>
-        <p class="hint">Member area terbuka di tab baru.</p>
+        <p class="hint">Kamu akan diarahkan ke member area.</p>
       </div>
       <footer><span class="copyright">Copyright 2026&#169; Moon Fat Studio - All Rights Reserved</span></footer>
     </section>
@@ -155,6 +169,13 @@
   }
   document.getElementById("submit").addEventListener("click",submit);
   document.getElementById("code").addEventListener("keydown",function(e){if(e.key==="Enter")submit();});
+  (function(){var pk=document.getElementById("peek"),ce=document.getElementById("code");
+    if(pk&&ce){pk.addEventListener("click",function(){
+      var hidden=ce.type==="password";
+      ce.type=hidden?"text":"password";
+      pk.classList.toggle("revealed",hidden);
+      ce.focus();
+    });}})();
   // auto-unlock kalau sudah pernah masuk di browser ini
   try{var saved=localStorage.getItem(STORE);if(saved&&saved.indexOf("http")===0)reveal(saved);}catch(e){}
 </script>
