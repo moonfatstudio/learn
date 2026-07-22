@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sesi 01: Audience Persona Mapping · Jago Desain E-Book</title>
+<meta name="description" content="Template Notion untuk memetakan pembaca ideal e-book kamu. Duplicate ke workspace Notion kamu dan mulai memetakan audiens.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,400&display=swap" rel="stylesheet">
+<style>
+  @font-face{
+    font-family:"Fraunces";
+    src:url("fonts/fraunces.woff2") format("woff2"),
+        url("fonts/fraunces.ttf") format("truetype");
+    font-weight:100 900;font-style:normal;font-display:swap;
+  }
+  @font-face{
+    font-family:"Space Grotesk";
+    src:url("fonts/spacegrotesk.woff2") format("woff2"),
+        url("fonts/spacegrotesk.ttf") format("truetype");
+    font-weight:100 900;font-style:normal;font-display:swap;
+  }
+  :root{
+    --ink:#040c14;
+    --panel:#0a1622;
+    --panel-2:#12233a;
+    --line:rgba(163,206,241,.16);
+    --gold:#f2cc8f;
+    --gold-deep:#e0b46a;
+    --blue:#a3cef1;
+    --text:#e7ecef;
+    --muted:#8ba6c4;
+    --serif:"Fraunces",Georgia,serif;
+    --display:"Space Grotesk",system-ui,sans-serif;
+    --sans:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{-webkit-user-select:none;-ms-user-select:none;user-select:none}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    font-family:var(--sans);
+    color:var(--text);
+    background:
+      radial-gradient(1100px 620px at 50% -8%, rgba(30,57,89,.55), transparent 60%),
+      radial-gradient(760px 460px at 88% 8%, rgba(242,204,143,.10), transparent 55%),
+      linear-gradient(180deg,#040c14 0%,#06101c 55%,#040c14 100%);
+    min-height:100vh;line-height:1.6;-webkit-font-smoothing:antialiased;
+    padding:clamp(24px,6vw,72px) 20px;display:flex;justify-content:center;
+  }
+  .wrap{width:100%;max-width:680px;animation:rise .7s cubic-bezier(.2,.7,.2,1) both}
+  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){.wrap{animation:none}}
+
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:9px;
+    font-family:var(--display);
+    font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--gold);padding:7px 14px;border:1px solid var(--line);
+    border-radius:100px;background:rgba(242,204,143,.05);
+  }
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold)}
+
+  h1{
+    font-family:var(--serif);font-weight:400;
+    font-size:clamp(2.4rem,7.4vw,3.7rem);line-height:1.04;
+    letter-spacing:-.01em;margin:26px 0 0;
+  }
+  h1 .accent{color:var(--gold)}
+  .lede{margin-top:20px;font-size:clamp(1rem,2.4vw,1.14rem);color:var(--muted);max-width:52ch}
+
+  .card{
+    margin-top:40px;border:1px solid var(--line);border-radius:18px;
+    background:linear-gradient(180deg,var(--panel) 0%,var(--panel-2) 100%);
+    padding:22px 22px 24px;position:relative;overflow:hidden;
+    box-shadow:0 30px 70px -40px rgba(0,0,0,.9);
+  }
+  .card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(180deg,var(--gold),transparent)}
+  .card-head{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+  .card-emoji{font-size:22px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.4))}
+  .card-title{font-family:var(--serif);font-size:1.2rem}
+  .card-meta{font-family:var(--display);font-size:11.5px;letter-spacing:.04em;color:var(--muted);margin-top:2px}
+  .rows{display:flex;flex-direction:column;gap:11px;margin:4px 0}
+  .row{display:flex;align-items:center;gap:12px;font-size:.93rem;color:#c7d6e6}
+  .row .chk{flex:0 0 auto;width:17px;height:17px;border-radius:5px;border:1.5px solid rgba(163,206,241,.4);display:grid;place-items:center;color:var(--gold);font-size:11px}
+
+  .cta-wrap{margin-top:30px}
+  .cta{
+    display:flex;align-items:center;justify-content:center;gap:11px;
+    width:100%;padding:17px 24px;border-radius:13px;text-decoration:none;
+    font-family:var(--display);font-weight:600;font-size:1.02rem;letter-spacing:.09em;
+    color:#241a06;background:linear-gradient(180deg,var(--gold),var(--gold-deep));
+    box-shadow:0 14px 34px -12px rgba(242,204,143,.55);
+    transition:transform .15s ease,box-shadow .15s ease,filter .15s ease;
+  }
+  .cta:hover{transform:translateY(-2px);box-shadow:0 20px 44px -12px rgba(242,204,143,.7);filter:brightness(1.03)}
+  .cta:active{transform:translateY(0)}
+  .cta:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+  .cta svg{width:19px;height:19px}
+  .hint{margin-top:12px;font-size:13px;color:var(--muted);text-align:center}
+
+  .steps{margin-top:44px;border-top:1px solid var(--line);padding-top:34px}
+  .steps h2{font-family:var(--display);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);margin-bottom:22px}
+  .step{display:flex;gap:16px;padding:12px 0}
+  .step + .step{border-top:1px dashed rgba(163,206,241,.12)}
+  .step .num{flex:0 0 auto;width:30px;height:30px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;font-family:var(--serif);font-size:16px;color:var(--gold);background:rgba(242,204,143,.06)}
+  .step .txt strong{display:block;font-weight:600;font-size:.98rem;margin-bottom:2px}
+  .step .txt span{font-size:.9rem;color:var(--muted)}
+  .step .txt b{color:var(--blue);font-weight:600}
+
+  footer{margin-top:46px;padding-top:22px;border-top:1px solid var(--line);text-align:left}
+  .copyright{font-family:"Poppins",var(--sans);font-style:italic;font-size:12.5px;letter-spacing:.01em;color:rgba(139,166,196,.55)}
+</style>
+<script>
+/* Proteksi konten: blokir klik-kanan, copy, seleksi, drag & shortcut devtools */
+(function () {
+  var stop = function (e) { e.preventDefault(); e.stopPropagation(); return false; };
+  ["contextmenu","copy","cut","selectstart","dragstart"].forEach(function (ev) {
+    document.addEventListener(ev, stop, true);
+  });
+  document.addEventListener("keydown", function (e) {
+    var k = (e.key || "").toLowerCase();
+    if (e.key === "F12" ||
+        (e.ctrlKey && e.shiftKey && (k === "i" || k === "j" || k === "c")) ||
+        (e.metaKey && e.altKey && (k === "i" || k === "j" || k === "c")) ||
+        (e.ctrlKey && k === "u")) {
+      return stop(e);
+    }
+  }, true);
+})();
+</script>
+</head>
+<body>
+  <main class="wrap">
+    <span class="eyebrow"><span class="dot"></span>Jago Desain E-Book · Sesi 01</span>
+
+    <h1>Audience<br><span class="accent">Persona Mapping</span></h1>
+    <p class="lede">Kenali pembaca ideal e-book kamu sebelum satu halaman pun didesain. Duplicate template Notion ini, isi sesuai audiensmu, dan pakai sebagai fondasi seluruh keputusan desain nanti.</p>
+
+    <section class="card" aria-label="Isi template">
+      <div class="card-head">
+        <span class="card-emoji">🎯</span>
+        <div>
+          <div class="card-title">Audience Persona Mapping</div>
+          <div class="card-meta">TEMPLATE NOTION · MOON FAT STUDIO</div>
+        </div>
+      </div>
+      <div class="rows">
+        <div class="row"><span class="chk">✓</span> Profil demografi &amp; psikografi pembaca</div>
+        <div class="row"><span class="chk">✓</span> Motivasi, tujuan, dan pain point audiens</div>
+        <div class="row"><span class="chk">✓</span> Kebiasaan baca &amp; kanal yang dipakai</div>
+        <div class="row"><span class="chk">✓</span> Ringkasan persona jadi satu halaman kerja</div>
+      </div>
+    </section>
+
+    <div class="cta-wrap">
+      <a class="cta" href="https://crocus-cabin-11e.notion.site/MFS-Workshop-Desain-E-Book-Audience-Persona-Mapping-37512c147af2807f80b1f140c8075dcb?pvs=74" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 9V5.5A1.5 1.5 0 0 1 10.5 4h8A1.5 1.5 0 0 1 20 5.5v8a1.5 1.5 0 0 1-1.5 1.5H15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><rect x="4" y="9" width="11" height="11" rx="1.6" stroke="currentColor" stroke-width="1.8"/></svg>
+        Duplicate Template ke Notion
+      </a>
+      <p class="hint">Halaman kebuka di tab baru. Login Notion kamu diperlukan untuk menyalin.</p>
+    </div>
+
+    <section class="steps">
+      <h2>Cara pakai</h2>
+      <div class="step">
+        <span class="num">1</span>
+        <p class="txt"><strong>Buka template</strong><span>Klik tombol di atas. Halaman Notion terbuka di tab baru.</span></p>
+      </div>
+      <div class="step">
+        <span class="num">2</span>
+        <p class="txt"><strong>Tekan Duplicate</strong><span>Di pojok kanan atas Notion, klik tombol <b>Duplicate</b>. Pilih workspace tujuanmu.</span></p>
+      </div>
+      <div class="step">
+        <span class="num">3</span>
+        <p class="txt"><strong>Mulai memetakan</strong><span>Template kini jadi milikmu. Isi tiap bagian sesuai audiens e-book yang kamu tuju.</span></p>
+      </div>
+    </section>
+
+    <footer>
+      <span class="copyright">Copyright 2026© Moon Fat Studio - All Rights Reserved</span>
+    </footer>
+  </main>
+</body>
+</html>
